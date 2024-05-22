@@ -71,6 +71,7 @@ namespace ariel
         Graph operator*(int num);
         Graph operator*=(int num);
         Graph operator*(const Graph &other);
+        Graph &operator*=(const Graph &other);
 
         friend std::ostream& operator<<(std::ostream &os, const Graph &g);
 

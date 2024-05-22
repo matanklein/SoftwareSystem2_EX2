@@ -157,24 +157,7 @@ ariel::Graph &ariel::Graph::operator+=(const Graph &other)
 
 ariel::Graph ariel::Graph::operator-()
 {
-    std::vector<std::vector<int>> newGraph(this->size, std::vector<int>(this->size, 0));
-    for (size_t i = 0; i < this->size; i++)
-    {
-        for (size_t j = 0; j < this->size; j++)
-        {
-            if (i == j)
-            {
-                newGraph[i][j] = 0;
-            }
-            else
-            {
-                newGraph[i][j] = -this->graph[i][j];
-            }
-        }
-    }
-    Graph newG;
-    newG.loadGraph(newGraph, this->isDirected);
-    return newG;
+    return *this * -1;
 }
 
 ariel::Graph ariel::Graph::operator-(const Graph &other)
@@ -337,6 +320,34 @@ ariel::Graph ariel::Graph::operator*(const Graph &other)
     Graph newG;
     newG.loadGraph(newGraph, this->isDirected);
     return newG;
+}
+
+ariel::Graph& ariel::Graph::operator*=(const Graph &other)
+{
+    if (this->size != other.size)
+    {
+        throw std::invalid_argument("Invalid operation: The graphs are't the same size.");
+    }
+    std::vector<std::vector<int>> newGraph(this->size, std::vector<int>(this->size, 0));
+    for (size_t i = 0; i < this->size; i++)
+    {
+        for (size_t j = 0; j < this->size; j++)
+        {
+            for (size_t k = 0; k < this->size; k++)
+            {
+                if (i == j)
+                {
+                    newGraph[i][j] = 0;
+                }
+                else
+                {
+                    newGraph[i][j] += this->graph[i][k] * other.graph[k][j];
+                }
+            }
+        }
+    }
+    this->loadGraph(newGraph, this->isDirected);
+    return *this;
 }
 
 std::ostream& ariel::operator<<(std::ostream &os, const Graph &g)
