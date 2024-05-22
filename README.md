@@ -3,7 +3,7 @@
 #    Mail: matank214@gmail.com
 #
 
-Graph =
+Graph
     Description: class that represents a graph.
 
     Data members:
@@ -76,7 +76,7 @@ Graph =
         bool operator<=(const Graph &other) - return true if this < other or this = other.
 
 
-Algorithms =
+Algorithms
     Description: class that represents algorithms on graph.
 
     Data members: None
