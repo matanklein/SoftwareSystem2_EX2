@@ -67,7 +67,7 @@ Graph
 
         friend std::ostream& operator<<(std::ostream &os, const Graph &g) - return an osstream that represent the graph, the garph will represent as a print of his rows.
 
-        bool operator==(const Graph &other) - return true if this[i,j] = other[i,j] or if !(this < other) && !(this > other). 
+        bool operator==(const Graph &other) const - return true if this[i,j] = other[i,j] or if !(this < other) && !(this > other). 
         bool operator!=(const Graph &other) - return if !(this = other).
         bool operator>(const Graph &other) const - return true if Graph this contains Graph other, meaning this[i,j] = other[i,j] for all i,j that are vertices in other, else return true if the amount of edges in this is bigger than other, else return true if this has more vertices than other, else return false.
 

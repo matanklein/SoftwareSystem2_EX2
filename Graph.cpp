@@ -89,7 +89,7 @@ std::string ariel::Graph::printGraph()
         }
         if (i != size - 1)
         {
-            str = str + ", \n";
+            str = str + ", ";
         }
         else
         {
@@ -322,7 +322,7 @@ ariel::Graph ariel::Graph::operator*(const Graph &other)
     return newG;
 }
 
-ariel::Graph& ariel::Graph::operator*=(const Graph &other)
+ariel::Graph &ariel::Graph::operator*=(const Graph &other)
 {
     if (this->size != other.size)
     {
@@ -349,42 +349,44 @@ ariel::Graph& ariel::Graph::operator*=(const Graph &other)
     this->loadGraph(newGraph, this->isDirected);
     return *this;
 }
-
-std::ostream& ariel::operator<<(std::ostream &os, const Graph &g)
+namespace ariel
 {
-    if (g.size == 0)
+    std::ostream& operator<<(std::ostream &os, const Graph &g)
     {
-        os << "Graph is empty." << std::endl;
-        return os;
-    }
-    for (size_t i = 0; i < g.size; i++)
-    {
-        for (size_t j = 0; j < g.size; j++)
+        if (g.size == 0)
         {
-            if (j == 0)
+            os << "Graph is empty." << std::endl;
+            return os;
+        }
+        for (size_t i = 0; i < g.size; i++)
+        {
+            for (size_t j = 0; j < g.size; j++)
             {
-                os << "[" << g.graph[i][j] << ", ";
+                if (j == 0)
+                {
+                    os << "[" << g.graph[i][j] << ", ";
+                }
+                else if (j == g.size - 1)
+                {
+                    os << g.graph[i][j] << "]";
+                }
+                else
+                    os << g.graph[i][j] << ", ";
             }
-            else if (j == g.size - 1)
+            if (i != g.size - 1)
             {
-                os << g.graph[i][j] << "]";
+                os << ", ";
             }
             else
-                os << g.graph[i][j] << ", ";
+            {
+                os << std::endl;
+            }
         }
-        if (i != g.size - 1)
-        {
-            os << ", " << std::endl;
-        }
-        else
-        {
-            os << std::endl;
-        }
+        return os;
     }
-    return os;
 }
 
-bool ariel::Graph::operator==(const Graph &other)
+bool ariel::Graph::operator==(const Graph &other) const
 {
     bool option1 = true;
     if (this->size != other.size)

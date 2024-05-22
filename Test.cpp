@@ -51,13 +51,13 @@ TEST_CASE("Test graph addition")
     g4.loadGraph(graph);
     CHECK_THROWS(g1 + g4);
 
-    vector<vector<int>> expectedGraph2 = {
+    vector<vector<int>> expectedGraph7 = {
         {0, 2, 2},
         {2, 0, 3},
         {2, 3, 0}};
     ariel::Graph expectedGraph5;
-    expectedGraph5.loadGraph(expectedGraph2);
-    CHECK(g2++ == expectedGraph5);
+    expectedGraph5.loadGraph(expectedGraph7);
+    CHECK((g2++) == expectedGraph5);
 
     vector<vector<int>> Graph6 = {
         {0, 1, 1},
@@ -248,7 +248,7 @@ TEST_CASE("Test graph operators"){
     
     CHECK(g1 <= g2);
     CHECK(g1 <= g3);
-    
+
     CHECK(g2 > g1);
     CHECK(g2 >= g1);
 }

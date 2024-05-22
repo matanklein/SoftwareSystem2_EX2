@@ -75,7 +75,7 @@ namespace ariel
 
         friend std::ostream& operator<<(std::ostream &os, const Graph &g);
 
-        bool operator==(const Graph &other);
+        bool operator==(const Graph &other) const;
         bool operator!=(const Graph &other);
         bool operator>(const Graph &other) const;
         bool operator<(const Graph &other) const;
